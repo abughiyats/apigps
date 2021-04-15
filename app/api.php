@@ -1,42 +1,48 @@
 <?php
 require_once './key.php';
 
+// reverse geocoding function
 function reverseGeocoding($lat, $long)
 {
+  //get apikey from .env
   $apikey = $_ENV['APIKEY'];
+  // opencage api
   $url = "https://api.opencagedata.com/geocode/v1/json?q={$lat}+{$long}&key={$apikey}";
-
+  //get json response
   $json = file_get_contents($url);
+  //decode the json
   $res = json_decode($json, true);
-
+  //if unable to geocode given address
   if (!check_status($res)) {
     return $data = [
       'status' => '400',
       'data' => result($res)
     ];
   }
+  //geocode response "OK"
   $data = [
     'status' => check_status($res) ? '200' : '400',
     'data' => result($res)
   ];
+  // encode data
   $data = json_encode($data, JSON_PRETTY_PRINT);
+  //create data.json file 
   file_put_contents('data.json', $data);
   return $data;
 }
 
+// forward geocoding function
 function geocoding($location)
 {
-  //  encode url
+  // remove non-alphanumeric character or field can't be empty
   if (!preg_match("/^[a-zA-Z0-9 ]*$/", $location) || !$location) {
     return 'unauthorized';
   }
   $apikey = $_ENV['APIKEY'];
   $location = urlencode($location);
   $url = "https://api.opencagedata.com/geocode/v1/json?q={$location}&key={$apikey}";
-
   $json = file_get_contents($url);
   $res = json_decode($json, true);
-  // var_dump($res);
 
   if (!check_status($res)) {
     return $data = [
@@ -44,6 +50,7 @@ function geocoding($location)
       'data' => result($res)
     ];
   }
+
   $data = [
     'status' => check_status($res) ? '200' : '400',
     'data' => result($res)
@@ -53,6 +60,7 @@ function geocoding($location)
   return $data;
 }
 
+// function to create data[coordinate and district]
 function result($res)
 {
   $data = [];
@@ -71,6 +79,7 @@ function result($res)
   return $data;
 }
 
+// check status code api
 function check_status($res)
 {
   if ($res['status']['code'] == 200) {
@@ -79,7 +88,7 @@ function check_status($res)
   return false;
 }
 
-
+// submit statement
 if (isset($_POST['search'])) {
   if (!empty($_POST["location"])) {
     $location = $_POST["location"];

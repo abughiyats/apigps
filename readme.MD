@@ -7,13 +7,13 @@
 1. Clone this repository to your directory:
 
 ```bash
- $ git clone https://github.com/abughiyats/apigps.git
+git clone https://github.com/abughiyats/apigps.git
 ```
 
 2. Install Dotenv Dependecy
 
 ```bash
- $ composer require vlucas/phpdotenv
+composer require vlucas/phpdotenv
 ```
 
 3. Copy .env-example to .env and use your API key for Opencage
