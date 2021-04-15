@@ -21,9 +21,6 @@
 
 ### When App is run
 
-![apigps](https://raw.githubusercontent.com/abughiyats/apigps/assets/runapp.png)
+![apigps](https://github.com/abughiyats/apigps/master/assets/runapp.png)
 
-
-
-![json-apigps](https://raw.githubusercontent.com/abughiyats/apigps/assets/runapp_json.png)
-
+![json-apigps](https://github.com/abughiyats/apigps/master/assets/runapp_json.png)
