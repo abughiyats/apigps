@@ -1,5 +1,5 @@
 <?php
-require_once "api.php";
+require_once "./app/api.php";
 $json = file_get_contents("./data.json");
 $data = json_decode($json, true);
 ?>

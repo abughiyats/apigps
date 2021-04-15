@@ -1,5 +1,5 @@
 <?php
-require_once 'key.php';
+require_once './key.php';
 
 function reverseGeocoding($lat, $long)
 {
